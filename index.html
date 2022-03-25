@@ -37,9 +37,9 @@
                      <h4>MAU ORDER APA?</h4>
                     <div class="form-radio">
                        
-                        <input type="radio" name="pesanan" value="newbie" id="newbie" checked="checked" />
+                        <input type="radio" name="pesanan" value="Korsa" id="newbie" checked="checked" />
                         <label for="newbie">Korsa</label>
-                        <input type="radio" name="pesanan" value="average" id="average" />
+                        <input type="radio" name="pesanan" value="Badge" id="average" />
                         <label for="average">Badge</label>
                     </div>
                     <hr>
@@ -124,7 +124,11 @@
   form.addEventListener('submit', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {console.log('Success!', response); location.href='thankyou.html'})
+      .then(response => {
+        console.log('Success!', response);
+        form.reset();
+        location.href='thankyou.html';
+    })
       .catch(error => console.error('Error!', error.message))
   })
 </script>
