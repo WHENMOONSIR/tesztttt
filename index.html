@@ -36,24 +36,25 @@
                     <hr>
                      <h4>MAU ORDER APA?</h4>
                     <div class="form-radio">
-                        <input type="radio" name="pesanan" value="korsa" id="korsa" checked="checked" />
-                        <label for="korsa">Korsa</label>
-                        <input type="radio" name="pesanan" value="badge" id="badge" />
-                        <label for="badge">Badge</label>
+                       
+                        <input type="radio" name="pesanan" value="newbie" id="newbie" checked="checked" />
+                        <label for="newbie">Korsa</label>
+                        <input type="radio" name="pesanan" value="average" id="average" />
+                        <label for="average">Badge</label>
                     </div>
                     <hr>
                     <h4>ISI DATA DULU YAA SAYANG..</h4>
                     <div class="form-textbox">
                         <label for="namapanjang">Nama Lengkap :</label>
-                        <input type="text" name="namapanjang" id="namapanjang" placeholder="ex: MUHAMMAD AZZAM HILMY" required=""/>
+                        <input type="text" name="namapanjang" id="namapanjang" placeholder="ex: MUHAMMAD AZZAM HILMY" required/>
                     </div>
                     <div class="form-textbox">
                         <label for="namabadge">Nama Korsa :</label>
-                        <input type="text" name="namabadge" id="namabadge" placeholder="ex: ZAMHIL (Boleh Custom)" required=""/>
+                        <input type="text" name="namabadge" id="namabadge" placeholder="ex: ZAMHIL (Boleh Custom)" required="" />
                     </div>
                     <div class="form-textbox">
                         <label for="ukuran">Nama Bidang :</label>
-                        <input type="text" name="namabidang" id="ukuran" placeholder="ex: KL" required=""/>
+                        <input type="text" name="namabidang" id="ukuran" placeholder="ex: KL" required/>
                     </div>
                     <hr>
                     <h4>[INFORMASI]</h4>
@@ -61,37 +62,37 @@
                     <div class="form-textbox">
                         <label for="name">Ukuran :</label>
                         <!-- <input type="text" name="ukuran" id="name" placeholder="ex: M" required=""/> -->
-                        <select name="ukuran" id="ukurann">
-                            <option value="S">S</option>                     
+                        <select name="ukuran" id="ukurann" required>
+                          <option value="">-- Pilih Ukuran --</option>
+                          <option value="S">S</option>
                           <option value="M">M</option>
                           <option value="L">L</option>
                           <option value="XL">XL</option>
                           <option value="XXL">XXL</option>
-                                                 <option value="XXXL">XXL</option>
+                          <option value="XXXL">XXXL</option>
                         </select>
                     </div>
-
+                    <div class="form-textbox">
+                        <label for="name">Alamat Tujuan:</label>
+                        <input type="text" name="alamattujuan" id="name" placeholder="ex: PLANET NAMEK/COD" required />
+                    </div>
                     <hr>
                     <h4>[INFORMASI]</h4>
-                    <h5>[x] Berat Korsa : 1 Kg<br>[x] Berat Badge : 0,1 Kg<br>[x] Check Ongkir Di: <a href="https://www.jne.co.id/id/tracking/tarif">SINI<br></a>[x] Pengiriman Dari JEBRES</h5>
-                                        <div class="form-textbox">
-                        <label for="name">Alamat Tujuan:</label>
-                        <input type="text" name="alamattujuan" id="name" placeholder="ex: PLANET NAMEK/COD" required=""/>
-                    </div> 
+                    <h5>Korsa HIMASTER : 1 Kg<br>Badge : 0,1 Kg<br>Check Ongkir Di: <a href="https://www.jne.co.id/id/tracking/tarif">SINI<br></a>Pengiriman Dari JEBRES</h5>
                     <div class="form-textbox">
                         <label for="name">Ongkir :</label>
-                        <input type="number" name="ongkir" id="name" placeholder="ex: 0" required="" />
+                        <input type="number" name="ongkir" id="name" placeholder="ex: 0" required />
 
                     </div>
                     <h5>Jika COD, Bisa Isi Dengan Angka 0</h5>
                     <hr>
                     <div class="form-group">
-                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required />
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" onclick="myFunction()" required />
                         <label for="agree-term" class="label-agree-term"><span><span></span></span>Data Yang Dimasukkan Sudah Benar  <!-- <a href="#" class="term-service">Terms of service</a> --></label>
                     </div>
 
                     <div class="form-textbox">
-                        <input type="submit" name="submit" id="submit" class="submit" value="Submit Data" onclick="location.href='thankyou.html'"/>
+                        <input type="submit" name="submit" id="submit" class="submit" value="Submit Data" style="display: none;"/>
                     </div>
                 </form>
 
@@ -100,16 +101,30 @@
                 </p>
             </div>
         </div>
-<p><center>Created By ❤️ (KL, MEDIF, PSDM, and You!).</center></p>
+        <p><center>Created By ❤️ (KL, MEDIF, and YOU!).</center></p>
     </div>
     <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbwzXsqD3ySUgstOgT50RQW2XdY_iBPCQEQmjlkvZ1ZeNaMUv_5k7UE_7xNHnw5Se6ToJw/exec'
   const form = document.forms['submit-to-google-sheet']
 
+  const btnSend = document.querySelector(".submit");
+  const btnCheckbox = document.querySelector(".agree-term");
+
+  function myFunction() {
+      var checkBox = document.getElementById("agree-term");
+      var text = document.getElementById("submit");
+      if (checkBox.checked == true){
+        text.style.display = "block";
+      } else {
+         text.style.display = "none";
+      }
+    }
+
+
   form.addEventListener('submit', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
+      .then(response => {console.log('Success!', response); location.href='thankyou.html'})
       .catch(error => console.error('Error!', error.message))
   })
 </script>
@@ -117,7 +132,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-
-
-
-
